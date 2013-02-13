@@ -137,7 +137,6 @@ while 1:
     mvp.note_on = True
 
     # set patch
-    # TODO: setup has to be called too (maybe )
     if mvp.set_patch :
         print "setting: " + mvp.patch
         try :
@@ -159,6 +158,13 @@ while 1:
             patch = imp.load_source(patch_name, patch_path)
             error = ''
             print "reloaded"
+            
+            # then call setup
+            try :
+                patch.setup(screen, mvp)
+                error = ''
+            except Exception, e:
+                error = traceback.format_exc()
         except Exception, e:
             error = traceback.format_exc()
           #  formatted_lines = traceback.format_exc().splitlines()
