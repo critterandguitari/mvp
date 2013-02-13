@@ -1945,3 +1945,10 @@ IOError: [Errno 2] No such file or directory: u'../../patches/ggg2/ggg2.py'
 [13/Feb/2013:15:48:53] ENGINE Started monitor thread '_TimeoutMonitor'.
 [13/Feb/2013:15:48:54] ENGINE Serving on 0.0.0.0:8080
 [13/Feb/2013:15:48:54] ENGINE Bus STARTED
+[13/Feb/2013:19:48:32] ENGINE Listening for SIGHUP.
+[13/Feb/2013:19:48:32] ENGINE Listening for SIGTERM.
+[13/Feb/2013:19:48:32] ENGINE Listening for SIGUSR1.
+[13/Feb/2013:19:48:32] ENGINE Bus STARTING
+[13/Feb/2013:19:48:32] ENGINE Started monitor thread '_TimeoutMonitor'.
+[13/Feb/2013:19:48:33] ENGINE Serving on 0.0.0.0:8080
+[13/Feb/2013:19:48:33] ENGINE Bus STARTED

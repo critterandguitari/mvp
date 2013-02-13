@@ -134,7 +134,7 @@ while 1:
         screen.fill( (0,0,0)) 
         pygame.display.flip()
 
-    mvp.note_on = True
+    #mvp.note_on = True
 
     # set patch
     if mvp.set_patch :
