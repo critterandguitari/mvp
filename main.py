@@ -71,11 +71,15 @@ patch = None
 num = 0
 patch = patches[num]
 
+#create mvp object
+mvp = hardware.HardwareInput()
+mvp.clear_flags()
+
 # run setup functions if patches have them
 # TODO: setup needs to get passed screen for things like setting sizes
 for patch in patches :
     try :
-        patch.setup()
+        patch.setup(screen, mvp)
     except AttributeError :
         print "no setup found"
         continue 
@@ -83,16 +87,9 @@ for patch in patches :
 # flush serial port
 serialport.flushInput()
 
-#create mvp object
-mvp = hardware.HardwareInput()
-
 buf = ''
 line = ''
-
-mvp.clear_flags()
-
 error = ''
-
 
 while 1:
     #print serialport.inWaiting()    

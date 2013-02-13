@@ -19,6 +19,7 @@ function getPatch(patch) {
 
 function getPatchList() {
      $.getJSON('http://raspberrypi.local:8080', function(data) {
+        $("#patches").empty();
         $.each(data, function (i,v) {
           
             $patch = $('<div class="side-button"></div>').append(v);
@@ -27,6 +28,18 @@ function getPatchList() {
             });
            $("#patches").append($patch);
         });
+    });
+}
+
+function saveNewPatch() {
+    
+    newName = prompt('Enter New Name (No Spaces!)')
+
+    $.post("http://raspberrypi.local:8080/save_new", { name: newName, contents: editor.getValue() })
+    .done(function(data) {
+        // reload patch list
+        getPatchList();
+         // alert(data);
     });
 }
 
@@ -67,9 +80,14 @@ $(document).ready(function() {
 
 
 
+    $("#save-new").click(function() {
+        saveNewPatch();
+    });
+
+
 
     $("#save").click(function() {
-        savePatch(editor);
+        savePatch();
     });
 
 });

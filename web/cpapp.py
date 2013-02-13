@@ -38,6 +38,22 @@ class Root():
         sock.sendto(data, (UDP_IP, UDP_PORT))
     send_command.exposed = True
 
+    # save a new patch TODO:  check if it already exists (don't overite existing)
+    # TODO:  what to do about bad names
+    def save_new(self, name, contents):
+        p = name
+        patch_dir = '../../patches/'+p
+        patch_path = '../../patches/'+p+'/'+p+'.py'
+        if not os.path.exists(patch_dir): os.makedirs(patch_dir)
+        with open(patch_path, "w") as text_file:
+            text_file.write(contents)
+        #then send reload command
+        #TODO: need to work all this out (how patches are stored / loaded in mother program)
+        self.send_command("setpatch," + p + "\n")
+        self.send_command("rlp\n")
+        return "SAVED " + name
+    save_new.exposed = True
+
     def save(self, name, contents):
         #save the patch
         p = name
