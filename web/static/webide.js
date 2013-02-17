@@ -35,6 +35,10 @@ function saveNewPatch() {
     
     newName = prompt('Enter New Name (No Spaces!)')
 
+    if (newName == null) {
+        alert('f');
+    }
+
     $.post("http://raspberrypi.local:8080/save_new", { name: newName, contents: editor.getValue() })
     .done(function(data) {
         // reload patch list
@@ -52,7 +56,21 @@ function savePatch() {
 }
 
 $(document).ready(function() {
-    
+
+
+    // this disables page while loading things 
+    $("body").on({
+        // When ajaxStart is fired, add 'loading' to body class
+        ajaxStart: function() { 
+            $(this).addClass("loading"); 
+        },
+        // When ajaxStop is fired, rmeove 'loading' from body class
+        ajaxStop: function() { 
+            $(this).removeClass("loading"); 
+        }    
+    });
+
+        
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/merbivore_soft");
     editor.getSession().setMode("ace/mode/python");
