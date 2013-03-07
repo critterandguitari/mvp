@@ -1,15 +1,18 @@
 editor = null
 currentPatch = ''
+ajaxURL = 'http://' + location.host
+
+//alert (ajaxURL)
 
 function sendCmd(cmd) {
-    $.post("http://raspberrypi.local:8080/send_command", { data: cmd })
+    $.post(ajaxURL + "/send_command", { data: cmd })
     .done(function(data) {
          // alert(data);
     });
 }
 
 function getPatch(patch) {
-    $.get('http://raspberrypi.local:8080/get_patch/' + patch, function(data) {
+    $.get(ajaxURL + '/get_patch/' + patch, function(data) {
         editor.setValue(data)
         editor.gotoLine(1)
         currentPatch = patch
@@ -18,7 +21,7 @@ function getPatch(patch) {
 }
 
 function getPatchList() {
-     $.getJSON('http://raspberrypi.local:8080', function(data) {
+     $.getJSON(ajaxURL + '', function(data) {
         $("#patches").empty();
         $.each(data, function (i,v) {
           
