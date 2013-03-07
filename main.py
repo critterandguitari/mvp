@@ -171,8 +171,6 @@ while 1:
           #  print formatted_lines[-3]
           #  print formatted_lines[-1]
     
-    mvp.note_on = True
-    
     try :
         patch.draw(screen, mvp)
         #error = ''

@@ -42,7 +42,7 @@ function saveNewPatch() {
         alert('f');
     }
 
-    $.post("http://raspberrypi.local:8080/save_new", { name: newName, contents: editor.getValue() })
+    $.post(ajaxurl + "/save_new", { name: newName, contents: editor.getValue() })
     .done(function(data) {
         // reload patch list
         getPatchList();
@@ -52,7 +52,7 @@ function saveNewPatch() {
 
 function savePatch() {
     
-    $.post("http://raspberrypi.local:8080/save", { name: currentPatch, contents: editor.getValue() })
+    $.post(ajaxurl + "/save", { name: currentPatch, contents: editor.getValue() })
     .done(function(data) {
          // alert(data);
     });
