@@ -42,7 +42,7 @@ function saveNewPatch() {
         alert('f');
     }
 
-    $.post(ajaxurl + "/save_new", { name: newName, contents: editor.getValue() })
+    $.post(ajaxURL + "/save_new", { name: newName, contents: editor.getValue() })
     .done(function(data) {
         // reload patch list
         getPatchList();
@@ -52,7 +52,7 @@ function saveNewPatch() {
 
 function savePatch() {
     
-    $.post(ajaxurl + "/save", { name: currentPatch, contents: editor.getValue() })
+    $.post(ajaxURL + "/save", { name: currentPatch, contents: editor.getValue() })
     .done(function(data) {
          // alert(data);
     });
