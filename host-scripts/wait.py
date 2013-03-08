@@ -16,9 +16,12 @@ line = ''
 
 def parse_line(line) : 
     array = line.split(',')
-    # basic parse next command
     if len(array) == 1:
-        if array[0] == "n" :
+        if array[0] == "sd" :
+            os.system('shutdown -h now')
+
+    if len(array) == 1:
+        if array[0] == "rst" :
             return True
         else :
             return False

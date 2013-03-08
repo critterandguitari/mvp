@@ -123,10 +123,9 @@ while 1:
 #        patch = patches[num]
 
 
-    if mvp.quarter_note : 
+#    if mvp.quarter_note : 
 #        screen.fill ((0,0,0))
 #        pygame.display.flip()
-        print "some note" 
 
 
     if mvp.clear_screen:
@@ -183,7 +182,7 @@ while 1:
     if mvp.osd :
         pygame.draw.rect(screen, OSDBG, (0, screen.get_height() - 40, screen.get_width(), 40))
         font = pygame.font.SysFont(None, 32)
-        text = font.render('patch: ' + str(patch.__name__), True, WHITE, OSDBG)
+        text = font.render(str(patch.__name__), True, WHITE, OSDBG)
         text_rect = text.get_rect()
         text_rect.x = 50
         text_rect.centery = screen.get_height() - 20

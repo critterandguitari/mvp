@@ -5,13 +5,13 @@ do
     cd /home/pi
     python wait.py
     echo "Mounting usb drive.."
-    if [ ! -d "/media/usbstick" ]; then
-        sudo mkdir /media/usbstick
+    if [ ! -d "/media/usbdrive" ]; then
+        sudo mkdir /media/usbdrive
     fi
-    sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /media/usbstick
+    sudo mount -t vfat -o uid=pi,gid=pi /dev/usbdrive /media/usbdrive
     echo "Loading MVP"
-    if [ -d "/media/usbstick/pythonpi/midio/system/web" ]; then
-        cd /media/usbstick/pythonpi/midio/system/web
+    if [ -d "/media/usbdrive/mvp/web" ]; then
+        cd /media/usbdrive/mvp/web
         ./run.sh &
         cd ../
         sudo python main.py
@@ -20,5 +20,5 @@ do
     echo "Stopping web server..."
     sudo killall -w python
     echo "Unmounting USB drive..."
-    sudo umount /media/usbstick
+    sudo umount /media/usbdrive
 done

@@ -4,6 +4,7 @@ class HardwareInput:
     knob1 = 200
     knob2 = 200
     knob3 = 200
+    knob4 = 200
     clear_screen = False
     note_on = False
     note_off = False
@@ -108,7 +109,7 @@ class HardwareInput:
 
 
         # basic parse of knob array
-        if len(array) == 4 :
+        if len(array) == 5 :
             if array[0] == "k" :
                 if array[1].isdigit() :
                     self.knob1 = int(array[1])
@@ -116,6 +117,8 @@ class HardwareInput:
                     self.knob2 = int(array[2])
                 if array[3].isdigit() :
                     self.knob3 = int(array[3])
+                if array[4].isdigit() :
+                    self.knob4 = int(array[4])
       
         # basic parse note on command
         if len(array) == 4:
