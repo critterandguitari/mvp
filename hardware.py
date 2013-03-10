@@ -34,6 +34,7 @@ class HardwareInput:
 
     #patch interface
     next_patch = False
+    prev_patch = False
     set_patch = False
     reload_patch = False
     patch = ''
@@ -87,6 +88,12 @@ class HardwareInput:
             if array[0] == "np" :
                 print 'np'
                 self.next_patch = True
+       
+        # basic parse next command
+        if len(array) == 1:
+            if array[0] == "pp" :
+                print 'pp'
+                self.prev_patch = True
   
         # basic midi start
         if len(array) == 1:
@@ -162,6 +169,7 @@ class HardwareInput:
 
     def clear_flags(self):
         self.next_patch = False
+        self.prev_patch = False
         self.clear_screen = False
         self.note_on = False
         self.note_off = False

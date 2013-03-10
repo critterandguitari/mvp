@@ -123,6 +123,13 @@ while 1:
         if num == len(patches) : 
             num = 0
         patch = patches[num]
+    if mvp.prev_patch: 
+        #print patches
+        num -= 1
+        if num < 0 : 
+            num = len(patches) - 1
+        patch = patches[num]
+
 
 
 #    if mvp.quarter_note : 
