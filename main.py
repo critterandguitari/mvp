@@ -118,9 +118,11 @@ while 1:
 
     # TODO :  update this to use sys.modules (see above, and below...)
     if mvp.next_patch: 
+        #print patches
         num += 1
-        if num == len(patches) : num = 0
-#        patch = patches[num]
+        if num == len(patches) : 
+            num = 0
+        patch = patches[num]
 
 
 #    if mvp.quarter_note : 

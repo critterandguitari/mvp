@@ -30,6 +30,8 @@ class HardwareInput:
     note_velocity = 0
     note_note = 60
 
+    aux_button = False
+
     #patch interface
     next_patch = False
     set_patch = False
@@ -43,10 +45,9 @@ class HardwareInput:
     def parse_serial(self, line):
         array = line.split(',')
         #print array
- 
         if len (array) == 1:
-            if array[0] == "rlp": 
-                self.reload_patch = True
+            if array[0] == "aux": 
+                self.aux_button = True
   
         if len (array) == 1:
             if array[0] == "osd": 
@@ -59,6 +60,18 @@ class HardwareInput:
         if len (array) == 1:
             if array[0] == "quit": 
                 self.quit = True
+  
+        if len (array) == 1:
+            if array[0] == "sd": 
+                self.quit = True
+  
+        if len (array) == 1:
+            if array[0] == "rst": 
+                self.reload_patch = True
+   
+        if len (array) == 1:
+            if array[0] == "rlp": 
+                self.reload_patch = True
  
         if len (array) == 1:
             if array[0] == "cs": 
@@ -71,7 +84,8 @@ class HardwareInput:
       
         # basic parse next command
         if len(array) == 1:
-            if array[0] == "n" :
+            if array[0] == "np" :
+                print 'np'
                 self.next_patch = True
   
         # basic midi start
@@ -161,6 +175,7 @@ class HardwareInput:
         self.next_patch = False
         self.set_patch = False
         self.reload_patch = False
+        self.aux_button = False
 
 
 
