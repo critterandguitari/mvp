@@ -5,7 +5,7 @@ import random
 import serial
 import fullfb
 import glob
-import hardware
+import mvp_system
 import imp
 import socket
 import traceback
@@ -72,7 +72,7 @@ num = 0
 patch = patches[num]
 
 #create mvp object
-mvp = hardware.HardwareInput()
+mvp = mvp_system.System()
 mvp.clear_flags()
 
 # run setup functions if patches have them

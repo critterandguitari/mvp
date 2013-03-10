@@ -1,5 +1,5 @@
 
-class HardwareInput:
+class System:
     
     knob1 = 200
     knob2 = 200
