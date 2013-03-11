@@ -1,3 +1,4 @@
+import fileinput
 
 class System:
     
@@ -6,9 +7,6 @@ class System:
     knob3 = 200
     knob4 = 200
     clear_screen = False
-    note_on = False
-    note_off = False
-
     midi_clk = False
     midi_start = False
     midi_stop = False
@@ -26,18 +24,21 @@ class System:
     midi_clk_count = 0
     whole_note_count = 0
 
+    note_on = False
+    note_off = False
     note_ch = 1
     note_velocity = 0
     note_note = 60
 
     aux_button = False
 
-    #patch interface
     next_patch = False
     prev_patch = False
     set_patch = False
     reload_patch = False
     patch = ''
+    
+    preset_index = 0
 
     quit = False
 
@@ -83,18 +84,30 @@ class System:
             if array[0] == "sd": 
                 self.clear_screen = True
       
-        # basic parse next command
         if len(array) == 1:
             if array[0] == "np" :
                 print 'np'
                 self.next_patch = True
        
-        # basic parse next command
         if len(array) == 1:
             if array[0] == "pp" :
                 print 'pp'
                 self.prev_patch = True
-  
+   
+        if len(array) == 1:
+            if array[0] == "spre" :
+                self.save_preset()
+ 
+        if len(array) == 1:
+            if array[0] == "npre" :
+                self.next_preset()
+ 
+        if len(array) == 1:
+            if array[0] == "ppre" :
+                self.prev_preset()
+ 
+
+
         # basic midi start
         if len(array) == 1:
             if array[0] == "ms" :
@@ -165,7 +178,41 @@ class System:
 
  
 
- 
+
+    def save_preset(self):
+        print "saving preset"
+        fo = open("../presets.txt", "a+")
+        fo.write(self.patch + "," + str(self.knob1) + "," + str(self.knob2) +"," + str(self.knob3) + "," + str(self.knob4) + "\n");
+        fo.close()
+
+    def next_preset(self):
+        presets = []
+        for line in fileinput.input("../presets.txt"):
+            presets.append(line)
+        self.preset_index += 1
+        if self.preset_index == len(presets):
+            self.preset_index = 0
+        self.recall_preset(presets[self.preset_index])
+
+    def prev_preset(self):
+        presets = []
+        for line in fileinput.input("../presets.txt"):
+            presets.append(line)
+        self.preset_index -= 1
+        if self.preset_index < 0:
+            self.preset_index = len(presets) - 1
+        self.recall_preset(presets[self.preset_index])
+
+    def recall_preset(self, preset) :
+        array = preset.strip().split(',')
+        if len(array) == 5 :
+            print "recalling preset: " + str(preset)
+            self.patch = array[0]
+            self.knob1 = int(array[1])
+            self.knob2 = int(array[2])
+            self.knob3 = int(array[3])
+            self.knob4 = int(array[4])
+            self.set_patch = True
 
     def clear_flags(self):
         self.next_patch = False

@@ -28,8 +28,6 @@ OSDBG = (0,0,255)
 font = pygame.font.SysFont(None, 32)
 notemsg = font.render('...', True, WHITE, OSDBG)
 
-
-
 # setup a UDP socket for recivinng data from other programs
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
@@ -51,10 +49,13 @@ serialport = serial.Serial("/dev/ttyAMA0", 115200)
 print "opening frame buffer"
 screen = fullfb.init()
 
+#create mvp object
+mvp = mvp_system.System()
+mvp.clear_flags()
 
 # TODO :  don't make a list of moduels, just make a list of their names, and select them from  sys.modules
 print "loading patches..."
-patches = []
+patch_names = []
 patch_folders = get_immediate_subdirectories('../patches/')
 
 for patch_folder in patch_folders :
@@ -62,23 +63,21 @@ for patch_folder in patch_folders :
     patch_path = '../patches/'+patch_name+'/'+patch_name+'.py'
     print patch_path
     try :
-        patches.append(imp.load_source(patch_name, patch_path))
+        imp.load_source(patch_name, patch_path)
+        patch_names.append(patch_name)
     except Exception, e:
         print traceback.format_exc()
 
 # set initial patch
-patch = None 
 num = 0
-patch = patches[num]
-
-#create mvp object
-mvp = mvp_system.System()
-mvp.clear_flags()
+mvp.patch = patch_names[num]
+patch = sys.modules[patch_names[num]]
 
 # run setup functions if patches have them
 # TODO: setup needs to get passed screen for things like setting sizes
-for patch in patches :
+for patch_name in patch_names :
     try :
+        patch = sys.modules[patch_name]
         patch.setup(screen, mvp)
     except AttributeError :
         print "no setup found"
@@ -115,22 +114,20 @@ while 1:
     except :
         pass
 
-
-    # TODO :  update this to use sys.modules (see above, and below...)
     if mvp.next_patch: 
         #print patches
         num += 1
-        if num == len(patches) : 
+        if num == len(patch_names) : 
             num = 0
-        patch = patches[num]
+        mvp.patch = patch_names[num]
+        patch = sys.modules[patch_names[num]]
     if mvp.prev_patch: 
         #print patches
         num -= 1
         if num < 0 : 
-            num = len(patches) - 1
-        patch = patches[num]
-
-
+            num = len(patch_names) - 1
+        mvp.patch = patch_names[num]
+        patch = sys.modules[patch_names[num]]
 
 #    if mvp.quarter_note : 
 #        screen.fill ((0,0,0))
