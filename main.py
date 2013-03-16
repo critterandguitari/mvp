@@ -183,6 +183,10 @@ while 1:
         #print traceback.format_exc()
         error = traceback.format_exc()
 
+
+    #save a frame
+    if mvp.aux_button :
+        pygame.image.save(screen, "./web/static/screengrab.jpg")
     
     # osd
     if mvp.osd :

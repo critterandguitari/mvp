@@ -46,7 +46,7 @@ class System:
     
     def parse_serial(self, line):
         array = line.split(',')
-        #print array
+        print array
         if len (array) == 1:
             if array[0] == "aux": 
                 self.aux_button = True
