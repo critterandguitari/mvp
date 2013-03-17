@@ -2966,3 +2966,18 @@ error: [Errno 9] Bad file descriptor
 [16/Mar/2013:17:44:33] ENGINE Bus EXITING
 [16/Mar/2013:17:44:33] ENGINE Bus EXITED
 [16/Mar/2013:17:44:33] ENGINE Waiting for child threads to terminate...
+[16/Mar/2013:23:55:10] ENGINE Listening for SIGHUP.
+[16/Mar/2013:23:55:10] ENGINE Listening for SIGTERM.
+[16/Mar/2013:23:55:10] ENGINE Listening for SIGUSR1.
+[16/Mar/2013:23:55:10] ENGINE Bus STARTING
+[16/Mar/2013:23:55:10] ENGINE Started monitor thread '_TimeoutMonitor'.
+[16/Mar/2013:23:55:10] ENGINE Serving on 0.0.0.0:8080
+[16/Mar/2013:23:55:10] ENGINE Bus STARTED
+[17/Mar/2013:00:13:20] ENGINE Keyboard Interrupt: shutting down bus
+[17/Mar/2013:00:13:20] ENGINE Bus STOPPING
+[17/Mar/2013:00:13:20] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('0.0.0.0', 8080)) shut down
+[17/Mar/2013:00:13:20] ENGINE Stopped thread '_TimeoutMonitor'.
+[17/Mar/2013:00:13:20] ENGINE Bus STOPPED
+[17/Mar/2013:00:13:20] ENGINE Bus EXITING
+[17/Mar/2013:00:13:20] ENGINE Bus EXITED
+[17/Mar/2013:00:13:20] ENGINE Waiting for child threads to terminate...

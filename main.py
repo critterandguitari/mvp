@@ -186,7 +186,13 @@ while 1:
 
     #save a frame
     if mvp.aux_button :
-        pygame.image.save(screen, "./web/static/screengrab.jpg")
+        filenum = 0
+        imagepath ="./web/static/sg-"+ str(filenum) + ".png"
+        while os.path.isfile(imagepath) :
+            filenum += 1
+            imagepath ="./web/static/sg-"+ str(filenum) + ".png"
+        pygame.image.save(screen, imagepath)
+        print imagepath
     
     # osd
     if mvp.osd :

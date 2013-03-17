@@ -46,7 +46,7 @@ class System:
     
     def parse_serial(self, line):
         array = line.split(',')
-        print array
+        #print array
         if len (array) == 1:
             if array[0] == "aux": 
                 self.aux_button = True
@@ -146,13 +146,13 @@ class System:
         if len(array) == 5 :
             if array[0] == "k" :
                 if array[1].isdigit() :
-                    self.knob1 = int(array[1])
+                    self.knob4 = int(array[1])
                 if array[2].isdigit() :
-                    self.knob2 = int(array[2])
+                    self.knob3 = int(array[2])
                 if array[3].isdigit() :
-                    self.knob3 = int(array[3])
+                    self.knob2 = int(array[3])
                 if array[4].isdigit() :
-                    self.knob4 = int(array[4])
+                    self.knob1 = int(array[4])
       
         # basic parse note on command
         if len(array) == 4:
